@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Simple Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:lightblue;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+    <input type="text" id="registerUsername" placeholder="Enter username">
+    <input type="password" id="registerPassword" placeholder="Enter password">
+    <button onclick="register()">Register</button>
+    
+    <h2>Login</h2>
+    <input type="text" id="loginUsername" placeholder="Enter username">
+    <input type="password" id="loginPassword" placeholder="Enter password">
+    <button onclick="login()">Login</button>
+    
+    <p id="message"></p>
+</div>
+
+<script>
+    function register() {
+        var username = document.getElementById("registerUsername").value;
+        var password = document.getElementById("registerPassword").value;
+
+        if (username === "" || password === "") {
+            document.getElementById("message").innerText = "Please fill in all fields!";
+            return;
+        }
+
+       
+        if (localStorage.getItem(username)) {
+            document.getElementById("message").innerText = "Username already taken!";
+        } else {
+            localStorage.setItem(username, password);
+            document.getElementById("message").innerText = "Registration successful!";
+        }
+    }
+    function login() {
+        var username = document.getElementById("loginUsername").value;
+        var password = document.getElementById("loginPassword").value;
+
+        if (username === "" || password === "") {
+            document.getElementById("message").innerText = "Please fill in all fields!";
+            return;
+        }
+        if (localStorage.getItem(username) === password) {
+            document.getElementById("message").innerText = "Login successful! Welcome, " + username;
+        } else {
+            document.getElementById("message").innerText = "Invalid username or password!";
+        }
+    }
+</script>
+
+</body>
+</html>
+
